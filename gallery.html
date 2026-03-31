@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monthsary Gallery</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="4pics.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="gallery-hero">
+      <div class="gallery-hero__copy">
+        <p class="eyebrow">Full month gallery</p>
+        <h1 id="galleryTitle">Monthsary Gallery</h1>
+        <p class="hero__text" id="gallerySubtitle">
+          Every saved memory for this month appears here with the date it was added and the date of the memory.
+        </p>
+        <div class="hero__actions">
+          <a href="index.html" class="button button--ghost">Back to Main Board</a>
+        </div>
+      </div>
+      <aside class="calendar-card">
+        <div class="calendar-card__header">
+          <div>
+            <p class="eyebrow">Calendar</p>
+            <h2 id="calendarMonthHeading">March 2026</h2>
+          </div>
+          <p class="calendar-card__note">Days with saved memories are highlighted.</p>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </aside>
+    </header>
+
+    <main class="gallery-layout">
+      <section class="gallery-main">
+        <div class="section-heading section-heading--gallery">
+          <div>
+            <p class="eyebrow">Saved moments</p>
+            <h2>All pictures and videos</h2>
+          </div>
+          <p class="gallery-count" id="galleryCount">0 memories</p>
+        </div>
+        <div class="gallery-list" id="galleryList"></div>
+      </section>
+
+      <aside class="timeline-card">
+        <p class="eyebrow">Timeline</p>
+        <h2>This month at a glance</h2>
+        <div class="timeline-list" id="timelineList"></div>
+      </aside>
+    </main>
+  </div>
+
+  <template id="galleryItemTemplate">
+    <article class="gallery-item">
+      <div class="gallery-item__media"></div>
+      <div class="gallery-item__content">
+        <div>
+          <p class="gallery-item__caption"></p>
+          <p class="gallery-item__meta"></p>
+          <p class="gallery-item__saved"></p>
+        </div>
+        <div class="gallery-item__actions">
+          <button class="gallery-action gallery-action--edit" type="button" title="Edit memory">Edit</button>
+          <button class="gallery-action gallery-action--delete" type="button" title="Delete memory" aria-label="Delete memory">&#128465;</button>
+        </div>
+      </div>
+      <form class="gallery-edit-form" hidden>
+        <label class="field">
+          <span>Caption</span>
+          <input class="gallery-edit-caption" type="text" maxlength="80" placeholder="Update caption">
+        </label>
+        <label class="field">
+          <span>Memory date</span>
+          <input class="gallery-edit-date" type="date">
+        </label>
+        <label class="upload-zone gallery-edit-upload">
+          <input class="gallery-edit-file" type="file" accept="image/*,video/*">
+          <span>Change image or video</span>
+          <small>Leave empty if you only want to edit the text or date.</small>
+        </label>
+        <div class="gallery-edit-actions">
+          <button class="button button--primary" type="submit">Save Changes</button>
+          <button class="button button--ghost gallery-edit-cancel" type="button">Cancel</button>
+        </div>
+      </form>
+    </article>
+  </template>
+
+  <template id="timelineItemTemplate">
+    <article class="timeline-item">
+      <p class="timeline-item__date"></p>
+      <p class="timeline-item__caption"></p>
+    </article>
+  </template>
+
+  <div class="modal" id="deleteModal" hidden>
+    <div class="modal__backdrop" data-close-modal="true"></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+      <p class="eyebrow">Delete memory</p>
+      <h2 id="deleteModalTitle">Are you sure to delete this?</h2>
+      <p class="modal__text">This will permanently remove the saved image or video from this month gallery.</p>
+      <div class="modal__actions">
+        <button class="button button--primary" id="confirmDeleteButton" type="button">Delete</button>
+        <button class="button button--ghost" id="cancelDeleteButton" type="button">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="storage.js"></script>
+  <script src="gallery.js"></script>
+</body>
+</html>
